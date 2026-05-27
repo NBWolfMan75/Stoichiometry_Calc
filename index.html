@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stoichiometry Calculator Applet</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Stoichiometry Calculator</h1>
+            <p class="subtitle">Solve stoichiometry problems using dimensional analysis</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="molar-mass">Molar Mass</button>
+            <button class="tab-btn" data-tab="single-reactant">Single Reactant</button>
+            <button class="tab-btn" data-tab="limiting-reactant">Limiting Reactant</button>
+            <button class="tab-btn" data-tab="percent-yield">Percent Yield</button>
+        </nav>
+
+        <!-- MOLAR MASS CALCULATOR TAB -->
+        <section id="molar-mass" class="tab-content active">
+            <h2>Molar Mass Calculator</h2>
+            <div class="form-group">
+                <label for="formula-input">Chemical Formula:</label>
+                <input type="text" id="formula-input" placeholder="e.g., NH3, H2O, Ca(OH)2">
+                <button onclick="calculateMolarMass()">Calculate Molar Mass</button>
+            </div>
+            <div id="molar-mass-result" class="result-box" style="display:none;">
+                <h3>Molar Mass Result:</h3>
+                <div id="mm-output"></div>
+                <button onclick="copyToClipboard('mm-output')">Copy Result</button>
+            </div>
+        </section>
+
+        <!-- SINGLE REACTANT TAB -->
+        <section id="single-reactant" class="tab-content">
+            <h2>Single Reactant Stoichiometry</h2>
+            
+            <div class="form-section">
+                <h3>Step 1: Enter Balanced Reaction</h3>
+                <div class="form-group">
+                    <label for="sr-reaction">Balanced Reaction:</label>
+                    <input type="text" id="sr-reaction" placeholder="e.g., N2 + 3H2 → 2NH3">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Step 2: Enter Reactant Information</h3>
+                <div class="form-group">
+                    <label for="sr-reactant-name">Reactant Name (with phase):</label>
+                    <input type="text" id="sr-reactant-name" placeholder="e.g., N2(g)">
+                </div>
+                <div class="form-group">
+                    <label for="sr-reactant-mass">Starting Mass (grams):</label>
+                    <input type="number" id="sr-reactant-mass" placeholder="e.g., 6.00" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="sr-reactant-mm">Molar Mass of Reactant (g/mol):</label>
+                    <input type="number" id="sr-reactant-mm" placeholder="e.g., 28.01" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="sr-product-name">Product Name (with phase):</label>
+                    <input type="text" id="sr-product-name" placeholder="e.g., NH3(g)">
+                </div>
+                <div class="form-group">
+                    <label for="sr-product-mm">Molar Mass of Product (g/mol):</label>
+                    <input type="number" id="sr-product-mm" placeholder="e.g., 17.03" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="sr-reactant-coeff">Coefficient of Reactant in Balanced Equation:</label>
+                    <input type="number" id="sr-reactant-coeff" placeholder="e.g., 1" value="1" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="sr-product-coeff">Coefficient of Product in Balanced Equation:</label>
+                    <input type="number" id="sr-product-coeff" placeholder="e.g., 2" value="1" step="1">
+                </div>
+            </div>
+
+            <button onclick="solveSingleReactant()" class="solve-btn">Solve</button>
+
+            <div id="sr-result" class="result-box" style="display:none;">
+                <h3>Solution:</h3>
+                <div id="sr-output"></div>
+                <button onclick="copyToClipboard('sr-output')">Copy Solution</button>
+                <button onclick="window.print()" class="print-btn">Print</button>
+            </div>
+        </section>
+
+        <!-- LIMITING REACTANT TAB -->
+        <section id="limiting-reactant" class="tab-content">
+            <h2>Limiting Reactant Problem</h2>
+            
+            <div class="form-section">
+                <h3>Step 1: Enter Balanced Reaction</h3>
+                <div class="form-group">
+                    <label for="lr-reaction">Balanced Reaction:</label>
+                    <input type="text" id="lr-reaction" placeholder="e.g., N2 + 3H2 → 2NH3">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Step 2: Molar Masses</h3>
+                <div id="lr-reactants-container"></div>
+                <button onclick="addReactantField()" class="add-btn">+ Add Another Reactant</button>
+            </div>
+
+            <div class="form-section">
+                <h3>Step 3: Product Information</h3>
+                <div class="form-group">
+                    <label for="lr-product-name">Product Name (with phase):</label>
+                    <input type="text" id="lr-product-name" placeholder="e.g., NH3(g)">
+                </div>
+                <div class="form-group">
+                    <label for="lr-product-mm">Molar Mass of Product (g/mol):</label>
+                    <input type="number" id="lr-product-mm" placeholder="e.g., 17.03" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="lr-product-coeff">Coefficient of Product in Balanced Equation:</label>
+                    <input type="number" id="lr-product-coeff" placeholder="e.g., 2" value="1" step="1">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Step 4: Actual Yield (Optional)</h3>
+                <div class="form-group">
+                    <label for="lr-actual-yield">Actual Yield Obtained (grams):</label>
+                    <input type="number" id="lr-actual-yield" placeholder="e.g., 58" step="0.01">
+                </div>
+            </div>
+
+            <button onclick="solveLimitingReactant()" class="solve-btn">Solve</button>
+
+            <div id="lr-result" class="result-box" style="display:none;">
+                <h3>Solution:</h3>
+                <div id="lr-output"></div>
+                <button onclick="copyToClipboard('lr-output')">Copy Solution</button>
+                <button onclick="window.print()" class="print-btn">Print</button>
+            </div>
+        </section>
+
+        <!-- PERCENT YIELD TAB -->
+        <section id="percent-yield" class="tab-content">
+            <h2>Percent Yield Calculator</h2>
+            
+            <div class="form-section">
+                <h3>Percent Yield Information</h3>
+                <div class="form-group">
+                    <label for="py-product-name">Product Name:</label>
+                    <input type="text" id="py-product-name" placeholder="e.g., NH3">
+                </div>
+                <div class="form-group">
+                    <label for="py-theoretical-yield">Theoretical Yield (grams):</label>
+                    <input type="number" id="py-theoretical-yield" placeholder="e.g., 68" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="py-actual-yield">Actual Yield (grams):</label>
+                    <input type="number" id="py-actual-yield" placeholder="e.g., 58" step="0.01">
+                </div>
+            </div>
+
+            <button onclick="calculatePercentYield()" class="solve-btn">Calculate</button>
+
+            <div id="py-result" class="result-box" style="display:none;">
+                <h3>Result:</h3>
+                <div id="py-output"></div>
+                <button onclick="copyToClipboard('py-output')">Copy Result</button>
+                <button onclick="window.print()" class="print-btn">Print</button>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Stoichiometry Calculator | Educational Tool</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
