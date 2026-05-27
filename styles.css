@@ -1,0 +1,351 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+.tabs {
+    display: flex;
+    background: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1em;
+    color: #666;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+    min-width: 150px;
+}
+
+.tab-btn:hover {
+    background: #e9ecef;
+    color: #333;
+}
+
+.tab-btn.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+    background: white;
+}
+
+.tab-content {
+    display: none;
+    padding: 40px;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.tab-content h2 {
+    color: #667eea;
+    margin-bottom: 30px;
+    font-size: 2em;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 10px;
+}
+
+.form-section {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.form-section h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.solve-btn,
+button:not(.tab-btn):not(.print-btn) {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+
+.solve-btn:hover,
+button:not(.tab-btn):not(.print-btn):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+.solve-btn:active,
+button:not(.tab-btn):not(.print-btn):active {
+    transform: translateY(0);
+}
+
+.add-btn {
+    background: #28a745;
+    color: white;
+    width: auto;
+    margin-top: 10px;
+}
+
+.add-btn:hover {
+    background: #218838;
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.print-btn {
+    background: #6c757d;
+    color: white;
+    margin-left: 10px;
+    width: auto;
+}
+
+.print-btn:hover {
+    background: #5a6268;
+}
+
+.result-box {
+    background: #f0f7ff;
+    border-left: 5px solid #667eea;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+    line-height: 1.8;
+}
+
+.result-box h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+#mm-output,
+#sr-output,
+#lr-output,
+#py-output {
+    font-family: 'Courier New', monospace;
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    overflow-x: auto;
+}
+
+.dimensional-analysis {
+    font-family: 'Courier New', monospace;
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    overflow-x: auto;
+    line-height: 1.6;
+}
+
+.calculation-step {
+    margin: 15px 0;
+    padding: 15px;
+    background: white;
+    border-left: 4px solid #667eea;
+    border-radius: 4px;
+}
+
+.calculation-step h4 {
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.limiting-reactant-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    background: white;
+}
+
+.limiting-reactant-table th,
+.limiting-reactant-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.limiting-reactant-table th {
+    background: #667eea;
+    color: white;
+}
+
+.limiting-reactant-table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.error {
+    color: #dc3545;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 12px;
+    border-radius: 6px;
+    margin: 10px 0;
+}
+
+.success {
+    color: #155724;
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 12px;
+    border-radius: 6px;
+    margin: 10px 0;
+}
+
+footer {
+    background: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    border-top: 1px solid #e9ecef;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    .tabs {
+        flex-direction: column;
+    }
+
+    .tab-btn {
+        min-width: auto;
+        border-bottom: none;
+        border-left: 3px solid transparent;
+    }
+
+    .tab-btn.active {
+        border-left-color: #667eea;
+        border-bottom: none;
+    }
+
+    .tab-content {
+        padding: 20px;
+    }
+
+    button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .print-btn {
+        margin-left: 0;
+    }
+}
+
+@media print {
+    body {
+        background: white;
+    }
+
+    .container {
+        box-shadow: none;
+        max-width: 100%;
+    }
+
+    .tabs,
+    footer,
+    button {
+        display: none;
+    }
+
+    .tab-content {
+        display: block !important;
+    }
+
+    .result-box {
+        page-break-inside: avoid;
+    }
+}
